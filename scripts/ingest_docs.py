@@ -113,6 +113,27 @@ def embed_batch(texts: list[str]) -> list[list[float]]:
     return embeddings
 
 
+def get_chroma_client(host: str, port: int):
+    return chromadb.HttpClient(
+        host=host,
+        port=port,
+        settings=ChromaSettings(anonymized_telemetry=False),
+    )
+
+
+def reset_collection(client, collection_name: str):
+    """Elimina y recrea la colección (compatible ChromaDB 0.5.x)."""
+    try:
+        client.delete_collection(collection_name)
+        print(f"Colección '{collection_name}' eliminada.")
+    except Exception:
+        pass
+    return client.create_collection(
+        name=collection_name,
+        metadata={"hnsw:space": "cosine"},
+    )
+
+
 def main():
     chunks = collect_chunks()
     if not chunks:
@@ -123,19 +144,9 @@ def main():
     port = int(os.getenv("CHROMA_PORT", settings.chroma_port))
     collection_name = os.getenv("CHROMA_COLLECTION", settings.chroma_collection)
 
-    client = chromadb.HttpClient(
-        host=host,
-        port=port,
-        settings=ChromaSettings(anonymized_telemetry=False),
-    )
-    try:
-        client.delete_collection(collection_name)
-    except Exception:
-        pass
-    collection = client.create_collection(
-        name=collection_name,
-        metadata={"hnsw:space": "cosine"},
-    )
+    print(f"Conectando a ChromaDB en {host}:{port} …")
+    client = get_chroma_client(host, port)
+    collection = reset_collection(client, collection_name)
 
     batch_size = 8
     for i in range(0, len(chunks), batch_size):
