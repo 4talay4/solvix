@@ -1,0 +1,9 @@
+{
+  "documentos": [
+    {
+      "archivo": "ejemplo-tema.md",
+      "titulo": "Introducción al curso (ejemplo)",
+      "descripcion": "Documento de prueba con los temas básicos del bot y buenas prácticas para los alumnos."
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+# Paquete compartido entre servicios

@@ -1,0 +1,33 @@
+{
+  "tests": [
+    {
+      "titulo": "Bloque 1 - Conceptos básicos",
+      "preguntas": [
+        {
+          "id": 1,
+          "enunciado": "¿Qué debe hacer un alumno tras registrarse en el bot?",
+          "opciones": {
+            "A": "Usar el bot inmediatamente",
+            "B": "Esperar autorización del administrador",
+            "C": "Pagar una cuota",
+            "D": "Enviar un email"
+          },
+          "correcta": "B",
+          "explicacion": "Tras el registro el estado es 'pendiente' hasta que el administrador autoriza el acceso."
+        },
+        {
+          "id": 2,
+          "enunciado": "¿De dónde debe obtener respuestas el asistente?",
+          "opciones": {
+            "A": "De internet libremente",
+            "B": "Solo del material del curso indexado",
+            "C": "De opinión personal",
+            "D": "De redes sociales"
+          },
+          "correcta": "B",
+          "explicacion": "El sistema RAG limita las respuestas al contexto de los documentos del curso."
+        }
+      ]
+    }
+  ]
+}
