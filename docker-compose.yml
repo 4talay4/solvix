@@ -27,14 +27,14 @@ services:
     #       memory: 2500M
 
   chromadb:
-    image: chromadb/chroma:latest
+    # IMPORTANTE: misma versión que chromadb en services/rag-api/requirements.txt
+    image: chromadb/chroma:0.5.23
     restart: unless-stopped
     environment:
       IS_PERSISTENT: "TRUE"
       ANONYMIZED_TELEMETRY: "FALSE"
     volumes:
       - chroma_data:/chroma/chroma
-    # Chroma puede tardar en arrancar; no bloqueamos el stack por healthcheck
 
   rag-api:
     build:
